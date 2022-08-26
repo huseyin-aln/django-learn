@@ -14,9 +14,9 @@
       crossorigin="anonymous"
     />
 
-    {% comment %}
+    
     <link rel="stylesheet" href=" {% static 'fscohort/css/bootstrap.min.css' %}" />
-    {% endcomment %}
+   
 
     <link rel="stylesheet" href=" {% static 'fscohort/css/style.css' %}  " />
 
@@ -26,6 +26,16 @@
   <body>
     {% comment %} {% include "users/navbar.html" %} {% endcomment %}
     <div style="margin-top: 100px; margin-bottom: 100px" class="container">
+
+      {% if messages %} 
+      {% for message in messages %} 
+          {% if message.tags == "error" %}
+              <div class="alert alert-danger">{{ message }}</div>
+          {% else %}
+              <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endif %} 
+      {% endfor %} 
+    {% endif %} 
 
       {% block container %}{% endblock container %}
     </div>
