@@ -11,3 +11,6 @@ Worked on creating form structures, sending database data, seeing the submitted 
 
 CRUD-message-decouple : 
 Practiced crud operations.
+
+Class_Based_Views : 
+Did CRUD exercises with class based views.
