@@ -1,3 +1,4 @@
+from re import template
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Todo
@@ -6,18 +7,18 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 
 #cbv
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 
 
-def home(request):
-    todos = Todo.objects.all().order_by('priority')
-    # todos = Todo.objects.all().order_by('-priority')
-    form = TodoForm()
-    context = {
-        "todos" : todos,
-        "form" : form
-    }
-    return render(request, "todo/home.html", context)
+# def home(request):
+#     todos = Todo.objects.all().order_by('priority')
+#     # todos = Todo.objects.all().order_by('-priority')
+#     form = TodoForm()
+#     context = {
+#         "todos" : todos,
+#         "form" : form
+#     }
+#     return render(request, "todo/home.html", context)
 
 class TodoList(ListView):
     model = Todo
@@ -49,6 +50,17 @@ class TodoCreate(CreateView):
     template_name = "todo/todo_add.html"  # defaiult u todo/todo.form.html
     success_url = reverse_lazy("list")
 
+class TodoCreateList(CreateView):
+    model = Todo
+    form_class = TodoForm
+    template_name = "todo/home.html"  # defaiult u todo/todo.form.html
+    success_url = reverse_lazy("list")
+
+    def get_context_data(self, **kwargs):
+        kwargs['todos'] = Todo.objects.order_by('-priority')
+        kwargs['done_count'] = Todo.objects.filter(is_done=True).count()
+        return super(TodoCreateList, self).get_context_data(**kwargs)
+
 
 
 def todo_update(request, id):
@@ -69,6 +81,16 @@ def todo_update(request, id):
 
 
 
+class TodoUpdate(UpdateView):
+    model = Todo
+    form_class = TodoForm
+    template_name = 'todo/todo/update.html'  
+    # pk_url_kwarg = "id"
+    success_url = reverse_lazy("home")
+
+
+
+
 def todo_delete(request, id):
     todo = Todo.objects.get(id=id)
     
@@ -81,3 +103,10 @@ def todo_delete(request, id):
         "todo": todo
     }
     return render(request, "todo/todo_delete.html", context)
+
+
+def is_completed(request,id):
+    todo=Todo.objects.get(id=id)
+    todo.is_done = not(todo.is_done)
+    todo.save()
+    return redirect('home')

@@ -51,11 +51,11 @@
                                     <td>{{todo.title}}</td>
                                     {% if todo.is_done == True%}
                                     <td>
-                                        ✅
+                                        <a href="{% url 'done' todo.id %}">✅</a>
                                     </td>
                                     {% elif todo.is_done == False %}
                                     <td>
-                                        💤
+                                        <a href="{% url 'done' todo.id %}"> 💤 </a>
                                     </td>
                                     {%endif%}
 
@@ -77,7 +77,7 @@
                                         <a href="delete/{{todo.id}}" title="Delete" class="">🗑️</a> 
                                     </td>
                                     <td>
-                                            <a href="/update/{{todo.id}}"  class="">⚙️</a> 
+                                        <a href="{% url 'update' todo.id %}"  class="">⚙️</a> 
 
                                     </td>
                                 </tr>
@@ -86,6 +86,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <p>is done todos count {{ done_count }} / {{ todos | length }}</p>
                     {%endif%}
                 </div>
             </div>
