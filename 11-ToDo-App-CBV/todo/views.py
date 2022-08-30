@@ -3,19 +3,29 @@ from django.http import HttpResponse
 from .models import Todo
 from .forms import TodoForm
 from django.contrib import messages
+from django.urls import reverse_lazy
 
-from django.views.generic import ListView
+#cbv
+from django.views.generic import ListView, CreateView
 
 
 def home(request):
-    todos = Todo.objects.all()
+    todos = Todo.objects.all().order_by('priority')
+    # todos = Todo.objects.all().order_by('-priority')
     form = TodoForm()
-    
     context = {
         "todos" : todos,
         "form" : form
     }
     return render(request, "todo/home.html", context)
+
+class TodoList(ListView):
+    model = Todo
+    # default context_object_name todolist
+    context_object_name = 'todos'
+    # default template_name todo/todo_list
+    # ordering = ['priority']
+    ordering = ['-priority']
 
 
 
@@ -33,12 +43,11 @@ def todo_create(request):
     }
     return render(request, "todo/todo_add.html", context)
 
-
-class TodoList(ListView):
+class TodoCreate(CreateView):
     model = Todo
-    # default context_object_name todolist
-    context_object_name = 'todos'
-    # default template_name todo/todo_list
+    form_class = TodoForm
+    template_name = "todo/todo_add.html"  # defaiult u todo/todo.form.html
+    success_url = reverse_lazy("list")
 
 
 
