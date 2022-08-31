@@ -1,13 +1,13 @@
-from re import template
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Todo
 from .forms import TodoForm
 from django.contrib import messages
-from django.urls import reverse_lazy
 
 #cbv
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
 
 
 # def home(request):
@@ -84,8 +84,8 @@ def todo_update(request, id):
 class TodoUpdate(UpdateView):
     model = Todo
     form_class = TodoForm
-    template_name = 'todo/todo/update.html'  
-    # pk_url_kwarg = "id"
+    template_name = 'todo/todo_update.html'  # Default todo/todo_update_form.html' 
+    # pk_url_kwarg = "id"   # default pk
     success_url = reverse_lazy("home")
 
 
@@ -103,6 +103,13 @@ def todo_delete(request, id):
         "todo": todo
     }
     return render(request, "todo/todo_delete.html", context)
+
+
+class TodoDelete(DeleteView):
+    model=Todo
+    template_name = 'todo/todo_delete.html'
+    # default fscohort/student_confirm_delete.html
+    success_url = reverse_lazy("home")
 
 
 def is_completed(request,id):
