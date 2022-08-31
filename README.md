@@ -14,3 +14,6 @@ Practiced crud operations.
 
 Class_Based_Views : 
 Did CRUD exercises with class based views.
+
+DJ-Auth-1 :
+Worked on authentication procedures.
