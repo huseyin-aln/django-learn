@@ -3,18 +3,6 @@
 <h1 align="center">ToDo App</h1>
 
 
-<div align="center">
-  <h3>
-    <a href="https://{your-demo-link.your-domain}">
-      Demo
-    </a>
-     | 
-    <a href="http://127.0.0.1:8000/">
-      Project
-    </a>
- 
-  </h3>
-</div>
 
 <!-- TABLE OF CONTENTS -->
 
