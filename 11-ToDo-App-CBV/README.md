@@ -3,18 +3,6 @@
 <h1 align="center">ToDo App</h1>
 
 
-<div align="center">
-  <h3>
-    <a href="https://{your-demo-link.your-domain}">
-      Demo
-    </a>
-     | 
-    <a href="https://{your-url-to-the-solution}">
-      Project
-    </a>
- 
-  </h3>
-</div>
 
 <!-- TABLE OF CONTENTS -->
 
@@ -69,7 +57,7 @@ $ git clone https://github.com/huseyin-aln/11-ToDo-App-CBV
 ## Contact
 
 - 
-- GitHub [@huseyin-aln](https://{github.com/huseyin-aln})
+- GitHub ([https://{github.com/huseyin-aln}](https://github.com/huseyin-aln))
 
-- Linkedin [@Hüseyin Arslan](https://{[linkedin.com/your-username](https://www.linkedin.com/in/hüseyin-arslan444/)})
+- Linkedin (https://{[linkedin.com/your-username](https://www.linkedin.com/in/hüseyin-arslan444/)})
 
