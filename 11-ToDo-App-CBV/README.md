@@ -57,7 +57,7 @@ $ git clone https://github.com/huseyin-aln/11-ToDo-App-CBV
 ## Contact
 
 - 
-- GitHub [@huseyin-aln](https://{github.com/huseyin-aln})
+- GitHub [@huseyin-aln]([https://{github.com/huseyin-aln}](https://github.com/huseyin-aln))
 
 - Linkedin [@Hüseyin Arslan](https://{[linkedin.com/your-username](https://www.linkedin.com/in/hüseyin-arslan444/)})
 
