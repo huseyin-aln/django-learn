@@ -14,3 +14,9 @@ Practiced crud operations.
 
 Class_Based_Views : 
 Did CRUD exercises with class based views.
+
+ToDo-App-CBV : 
+Todo App project made with function based views was done with class based.
+
+DJ-Auth-1 :
+Worked on authentication procedures.
