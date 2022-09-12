@@ -23,3 +23,6 @@ Worked on authentication procedures.
 
 13-DJ-Auth-2 :
 Worked on auth forms.
+
+14-Django-Test:
+Did test operations with django build.
