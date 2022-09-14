@@ -21,8 +21,11 @@ Todo App project made with function based views was done with class based.
 DJ-Auth-1 :
 Worked on authentication procedures.
 
-13-DJ-Auth-2 :
+DJ-Auth-2 :
 Worked on auth forms.
 
-14-Django-Test:
+Django-Test:
 Did test operations with django build.
+
+Admin-Panel:
+Did admin panel exercise.
