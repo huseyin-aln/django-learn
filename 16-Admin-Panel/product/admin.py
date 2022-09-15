@@ -5,6 +5,9 @@ from .models import Product, Review, Category
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django_admin_listfilter_dropdown.filters import RelatedDropdownFilter, DropdownFilter
+from rangefilter.filters import DateRangeFilter, DateTimeRangeFilter
+from import_export.admin import ImportExportModelAdmin
+from .resources import ReviewResource
 
 
 
@@ -27,7 +30,7 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug' : ('name',)}
     list_per_page = 15
     # list_filter = ("is_in_stock", "create_date", "name")
-    list_filter = ("is_in_stock", "create_date",
+    list_filter = ("is_in_stock", ("create_date", DateTimeRangeFilter),
         ('name', DropdownFilter),
     )
     
@@ -70,13 +73,14 @@ class ProductAdmin(admin.ModelAdmin):
         return mark_safe("******")
     
 
-class ReviewAdmin(admin.ModelAdmin):
+class ReviewAdmin(ImportExportModelAdmin):
     list_display = ('__str__', 'created_date', 'is_released')
     list_per_page = 50
     raw_id_fields = ('product',) 
     list_filter = (
         ('product', RelatedDropdownFilter),
     )
+    resource_class = ReviewResource
     
 
 
