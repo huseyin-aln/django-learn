@@ -3,6 +3,10 @@ from django.contrib import admin
 # Register your models here.
 from .models import Product, Review, Category
 from django.utils import timezone
+from django.utils.safestring import mark_safe
+from django_admin_listfilter_dropdown.filters import RelatedDropdownFilter, DropdownFilter
+
+
 
 
 class ReviewInline(admin.TabularInline):  # StackedInline different view same job
@@ -16,15 +20,21 @@ class ReviewInline(admin.TabularInline):  # StackedInline different view same jo
 
 class ProductAdmin(admin.ModelAdmin):
     # readonly_fields = ("create_date",)
-    list_display = ("name", "create_date", "is_in_stock", "update_date", "added_days_ago", "how_many_reviews")
+    list_display = ("name", "create_date", "is_in_stock", "update_date", "added_days_ago", "how_many_reviews","bring_img_to_list")
     list_editable = ( "is_in_stock", )
     list_display_links = ("create_date", ) #can't add items in list_editable to here
     search_fields = ("name", "create_date")
     prepopulated_fields = {'slug' : ('name',)}
     list_per_page = 15
+    # list_filter = ("is_in_stock", "create_date", "name")
+    list_filter = ("is_in_stock", "create_date",
+        ('name', DropdownFilter),
+    )
+    
     date_hierarchy = "update_date"
     inlines = (ReviewInline,)
     # fields = (('name', 'slug'), 'description', "is_in_stock")
+    readonly_fields = ("bring_image",)
     fieldsets = (
         ("test", {
             "fields": (
@@ -33,7 +43,7 @@ class ProductAdmin(admin.ModelAdmin):
         }),
         ('Optionals Settings', {
             "classes" : ("collapse", ),
-            "fields" : ("description", "categories"),
+            "fields" : ("description", "categories","product_img", "bring_image"),
             'description' : "You can use this section for optionals settings"
         })
     )
@@ -52,12 +62,21 @@ class ProductAdmin(admin.ModelAdmin):
     def added_days_ago(self, product):
         fark = timezone.now() - product.create_date
         return fark.days
+
+    
+    def bring_img_to_list(self, obj):
+        if obj.product_img:
+            return mark_safe(f"<img src={obj.product_img.url} width=50 height=50></img>")
+        return mark_safe("******")
     
 
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'created_date', 'is_released')
     list_per_page = 50
     raw_id_fields = ('product',) 
+    list_filter = (
+        ('product', RelatedDropdownFilter),
+    )
     
 
 
