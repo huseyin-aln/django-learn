@@ -29,3 +29,6 @@ Did test operations with django build.
 
 Admin-Panel:
 Did admin panel exercise.
+
+Serializers:
+Created API.
