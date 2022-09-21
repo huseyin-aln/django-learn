@@ -34,7 +34,8 @@ Serializers:
 Created API.
 
 DRF-FBV :
-django rest framework function based views
+django rest framework function based views.
 
 DRF-CBV :
-django rest framework class based views
+django rest framework class based views.
+
