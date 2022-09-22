@@ -39,3 +39,7 @@ django rest framework function based views.
 DRF-CBV :
 django rest framework class based views.
 
+DRF-Auth-Permissions:
+Auth and permissions studies were done with django rest framework.
+
+
